@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Watch History</title>
+</head>
+<body>
+    <h1>Watch History</h1>
+    <ul>
+        {% for item in watch_history %}
+            <li>{{ item.Show.Title }} - {{ item.Date }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Movie{% endblock title %}
+
+{% block body %}
+<main>
+    <article>
+      <section class="movie-detail">
+        {% comment %} <video controls>
+            <source src="{{ movie.Video.url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video> {% endcomment %}
+        <div class="container">
+
+            <figure class="movie-detail-banner">
+                <img src="{{ movie.Image.url }}" alt="{{ movie.Title }} movie poster">
+                <button class="play-btn">
+                    <ion-icon name="play-circle-outline"></ion-icon>
+                </button>
+            </figure>
+        
+            <div class="movie-detail-content">
+        
+                <h1 class="h1 detail-title">
+                    {{ movie.Title }}
+                </h1>
+                <p class="detail-subtitle">{{ movie.Actor }}, {{ movie.Actress }}</p>
+                
+                <div class="meta-wrapper">
+        
+                    <div class="badge-wrapper">
+                        <div class="badge badge-outline">HD</div>
+
+                    </div>
+                    
+        
+                    <div class="ganre-wrapper">
+                        {% comment %} {% for genre in movie.Genre.split(",") %} {% endcomment %}
+                        <a href="#">{{ movie.Genre }}</a>
+                        {% comment %} {% endfor %} {% endcomment %}
+                    </div>
+
+                    
+        
+                    <div class="date-time">
+                        <div>
+                            <ion-icon name="calendar-outline"></ion-icon>
+                            <time datetime="{{ movie.Release_date|date:'Y-m-d' }}">{{ movie.Release_date|date:'F d, Y' }}</time>
+                        </div>
+                        <div>
+                            <ion-icon name="time-outline"></ion-icon>
+                            <time datetime="PT{{ movie.Duration }}M">{{ movie.Duration }} min</time>
+                        </div>
+                        <div>
+                            <ion-icon name="star"></ion-icon>
+                            <data>{{ movie.Rating }}</data>
+                        </div>
+                    </div>
+        
+                </div>
+        
+                <p class="storyline">
+                    {{ movie.Description }}
+                </p>
+        
+               
+        
+            </div>
+        </div>
+        
+        </div>
+      </section>
+
+
+
+      <div class="video-container">
+        <video controls style="width: 100%;">
+            <source src="{{ movie.Video.url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+    </div>
+    
+
+   
+
+      <section class="tv-series">
+        <div class="container">
+
+          <p class="section-subtitle">Best TV Series</p>
+
+          <h2 class="h2 section-title">World Best TV Series</h2>
+         
+        
+        
+          <ul class="movies-list">
+
+            {% for recommended_movie in recommended_movies %}
+            <li>
+              <div class="movie-card">
+                <a href="{% url 'movie' recommended_movie.Show_id %}">
+                  <figure class="card-banner">
+                    <img src="{{ recommended_movie.Image.url }}" alt="{{ recommended_movie.Title }} movie poster">
+                  </figure>
+                </a>
+                <div class="title-wrapper">
+                  <a href="{% url 'movie' recommended_movie.Show_id %}">
+                    <h3 class="card-title">{{ recommended_movie.Title }}</h3>
+                  </a>
+                  <time datetime="{{ recommended_movie.Release_date|date:'Y' }}">{{ recommended_movie.Release_date|date:'Y' }}</time>
+                </div>
+                <div class="card-meta">
+                  <div class="badge badge-outline">{{ recommended_movie.Views }}</div>
+                  <div class="duration">
+                    <ion-icon name="time-outline"></ion-icon>
+                    <time datetime="PT{{ recommended_movie.Duration }}M">{{ recommended_movie.Duration }} min</time>
+                  </div>
+                  <div class="rating">
+                    <ion-icon name="star"></ion-icon>
+                    <data>{{ recommended_movie.Rating }}</data>
+                  </div>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+      
+          </ul>
+      
+           
+
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+
+
+
+
+  <!-- 
+    - #FOOTER
+  -->
+
+  <footer class="footer">
+
+  
+
+        <div class="divider"></div>
+
+        <div class="quicklink-wrapper">
+
+          <ul class="quicklink-list">
+
+            <li>
+              <a href="#" class="quicklink-link">Faq</a>
+            </li>
+
+            <li>
+              <a href="#" class="quicklink-link">Help center</a>
+            </li>
+
+            <li>
+              <a href="#" class="quicklink-link">Terms of use</a>
+            </li>
+
+            <li>
+              <a href="#" class="quicklink-link">Privacy</a>
+            </li>
+
+          </ul>
+
+          <ul class="social-list">
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-pinterest"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+
+       
+
+        <img src="{% static 'assets/images/logo4.png' %}" alt="" class="footer-bottom-img">
+
+      </div>
+    </div>
+
+  </footer>
+
+
+
+
+
+  <!-- 
+    - #GO TO TOP
+  -->
+
+  <a href="#top" class="go-top" data-go-top>
+    <ion-icon name="chevron-up"></ion-icon>
+  </a>
+
+
+
+
+{% endblock body %}

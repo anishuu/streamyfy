@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>streamify Registration Page</title>
+    <link rel="stylesheet" href="{% static 'style1.css' %}">
+    <script>
+        function showPopup(message) {
+            alert(message);
+        }
+    </script>
+</head>
+<body>
+    <nav>
+        <a href="#"><img src="{% static 'assets/images/logo4.png' %}" alt="logo"></a>
+    </nav>
+    <div class="form-wrapper">
+     
+        <form method="post" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <div class="form-control">
+                <input type="text" name="first_name" required>
+                <label>First Name</label>
+            </div>
+            <div class="form-control">
+                <input type="text" name="last_name" required>
+                <label>Last Name</label>
+            </div>
+            <div class="form-control">
+                <input type="email" name="email" required>
+                <label>Email</label>
+            </div>
+            <div class="form-control">
+                <input type="password" name="password1" required>
+                <label>Password</label>
+            </div>
+            <div class="form-control">
+                <input type="password" name="password2" required>
+                <label>Confirm Password</label>
+            </div>
+            <div class="form-control">
+                <input type="text" name="phone_number" required>
+                <label>Phone Number</label>
+            </div>    
+            <div class="form-control">
+                <input type="text" name="address" required>
+                <label>Address</label>
+            </div>
+            <input type="hidden" name="plan_id" value="{{ plan_id }}">
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="{% url 'login' %}">Sign in</a></p>
+    </div>
+
+    <script>
+        function validateForm() {
+            // Here, you can add client-side validation logic if needed
+            return true;  // Returning true to submit the form
+        }
+
+        // Check if the "user_exists" variable is set, then show the popup message
+        {% if user_exists %}
+            window.onload = function() {
+                showPopup("User already exists!");
+            };
+        {% endif %}
+    </script>
+</body>
+</html>

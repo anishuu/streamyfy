@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'payment222.css' %}">
+</head>
+<body>
+    <h1 class="title">Choose the plan that’s right for you</h1>
+
+<section class="container">
+  {% for plan in plans %}
+  <article class="pricing-card">
+    <div class="iconBx">
+        {% comment %} <img src="{% static plan.icon_url %}" alt="{{ plan.plan_type }}"> {% endcomment %}
+    </div>
+
+    <div class="card-title">{{ plan.plan_type }}</div>
+    
+    <ul class="pricing-feature">
+      <li>Monthly price ${{ plan.plan_price }}</li>
+      <li>Duration: {{ plan.plan_duration }} {% if plan.plan_duration == 1 %} day{% else %} days{% endif %}</li>
+      <li>Unlimited Download</li>
+      <li>Latest Movies</li>
+      <li>unlimited watches</li>
+      <li>Anywhere on Any Device</li>
+      <!-- Add more plan features here -->
+    </ul>
+    
+    <div class="btnBx">
+      <a href="{% url 'signup' %}?plan_id={{ plan.plan_id }}">
+      <button>Order Now!</button>
+      </a>
+    </div>
+  </article>
+  {% endfor %}
+
+  
+</section>
+</body>
+</html>
