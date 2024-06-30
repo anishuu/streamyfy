@@ -1,2 +1,2 @@
 # streamyfy
-this is an online video
+this is an online video streaming platform
